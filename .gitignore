@@ -1,0 +1,24 @@
+# idea
+.idea/*
+*.iml
+*.ipr
+*.iws
+out/
+
+# java
+*.jar
+*.class
+
+# log
+*.log
+
+# macos
+.DS_Store
+
+# gradle
+.gradle/
+build/
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
