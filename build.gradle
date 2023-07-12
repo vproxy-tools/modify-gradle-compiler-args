@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'io.vproxy'
+version '1.0.0'
+
+sourceCompatibility = 11.0
+targetCompatibility = 11.0
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':agent')
+}
+
+subprojects {
+    apply plugin: 'java'
+    sourceCompatibility = 11.0
+    targetCompatibility = 11.0
+}
+
+project(':agent') {
+    jar {
+        archiveBaseName = 'modify-gradle-compiler-args-agent'
+        version = ''
+        manifest {
+            attributes 'Premain-Class': 'io.vproxy.modify_gradle_compiler_args.agent.Premain'
+            attributes 'Agent-Class': 'io.vproxy.modify_gradle_compiler_args.agent.Premain'
+        }
+        exclude 'module-info.class'
+    }
+}
