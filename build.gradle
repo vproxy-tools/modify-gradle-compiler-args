@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
 }
 
 group 'io.vproxy'
@@ -21,16 +22,33 @@ subprojects {
     apply plugin: 'java'
     sourceCompatibility = 11.0
     targetCompatibility = 11.0
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
 }
 
 project(':agent') {
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    dependencies {
+        implementation 'io.vproxy:javaagent-base:1.0.0'
+    }
+    compileJava {
+        options.compilerArgs += '--add-exports=java.base/jdk.internal.org.objectweb.asm=io.vproxy.javaagent,io.vproxy.modify_gradle_compiler_args.agent'
+        options.compilerArgs += '--add-exports=java.base/jdk.internal.org.objectweb.asm.tree=io.vproxy.javaagent,io.vproxy.modify_gradle_compiler_args.agent'
+    }
     jar {
-        archiveBaseName = 'modify-gradle-compiler-args-agent'
-        version = ''
         manifest {
             attributes 'Premain-Class': 'io.vproxy.modify_gradle_compiler_args.agent.Premain'
             attributes 'Agent-Class': 'io.vproxy.modify_gradle_compiler_args.agent.Premain'
         }
+    }
+    shadowJar {
+        archiveBaseName.set('modify-gradle-compiler-args-agent')
+        archiveClassifier.set('')
+        archiveVersion.set('')
         exclude 'module-info.class'
     }
 }

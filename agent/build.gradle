@@ -1,4 +1,0 @@
-compileJava {
-    options.compilerArgs += '--add-exports=java.base/jdk.internal.org.objectweb.asm=io.vproxy.modify_gradle_compiler_args.agent'
-    options.compilerArgs += '--add-exports=java.base/jdk.internal.org.objectweb.asm.tree=io.vproxy.modify_gradle_compiler_args.agent'
-}

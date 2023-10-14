@@ -1,5 +1,6 @@
 package io.vproxy.modify_gradle_compiler_args.agent;
 
+import io.vproxy.javaagent.AbstractTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 

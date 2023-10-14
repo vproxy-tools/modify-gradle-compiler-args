@@ -9,7 +9,7 @@ A simple java-agent makes your Gradle journey much more fluent!
 
 ### 1. compile
 
-`./gradlew clean jar`
+`./gradlew clean shadowJar`
 
 ### 2. copy to gradle folder
 
